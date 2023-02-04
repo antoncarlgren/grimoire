@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "50bfa27e-aa58-4241-88f4-8d97b2069b8d"
+      }
+    },
+    "owner": "antoncarlgren"
   }
 }
