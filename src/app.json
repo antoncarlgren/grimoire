@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "spell-list",
-    "slug": "spell-list",
+    "name": "grimoire",
+    "slug": "grimoire",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
