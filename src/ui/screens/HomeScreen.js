@@ -4,7 +4,7 @@ import ContentContainer from '../components/containers/ContentContainer';
 import SearchField from '../components/input/SearchField';
 import HomeHeader from '../components/text/HomeHeader';
 
-const HomeScreen = () =>  {
+const HomeScreen = ({ onLayout }) =>  {
   return (
     <ContentContainer style={[styles.container]}>
       <View style={[globalStyles.centerContent]}>
