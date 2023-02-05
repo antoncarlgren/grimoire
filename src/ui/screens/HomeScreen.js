@@ -6,7 +6,9 @@ import HomeHeader from '../components/text/HomeHeader';
 
 const HomeScreen = ({ onLayout }) =>  {
   return (
-    <ContentContainer style={[styles.container]}>
+    <ContentContainer 
+      style={[styles.container]}
+      onLayout={onLayout}>
       <View style={[globalStyles.centerContent]}>
         <View style={[styles.homeImageWrapper]}>
           <Image
