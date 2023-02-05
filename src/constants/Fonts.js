@@ -1,12 +1,12 @@
-export const fontSizes = {
-  s: normalize(14),
-  m: normalize(16),
-  l: normalize(18),
-  xl: normalize(29)
+export const textSizes = {
+  s: 14,
+  m: 16,
+  l: 18,
+  xl: 20
 };
 
 export const fonts = {
-  default: 'JetBrainsMono-Regular',
+  regular: 'JetBrainsMono-Regular',
   italic: 'JetBrainsMono-Italic',
   medium: 'JetBrainsMono-Medium',
   mediumItalic: 'JetBrainsMono-MediumItalic',

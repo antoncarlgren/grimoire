@@ -1,22 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { useState, useCallback, useEffect } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+import * as Font from 'expo-font';
+import HomeScreen from './ui/screens/HomeScreen';
+import { loadFonts } from './init/InitializeFonts';
 
 const App = () =>  {
+  const [isLoaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        await loadFonts();
+      }
+      catch(ex) {
+        console.warn(ex);
+      }
+      finally {
+        setLoaded(true);
+      }
+    }
+
+    load();
+  }, [])
+
+  const onLayoutRootView = useCallback(async () => {
+    if(isLoaded) {
+      await SplashScreen.hideAsync();
+    }
+  }, [isLoaded]);
+
+  if(!isLoaded) {
+    return null
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <HomeScreen />
   );
 }
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
