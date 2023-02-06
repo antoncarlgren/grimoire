@@ -1,9 +1,13 @@
+import { View } from 'react-native';
 import { useState, useCallback, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
-import * as Font from 'expo-font';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './ui/screens/HomeScreen';
+import SearchResultScreen from './ui/screens/SearchResultScreen';
 import { loadFonts } from './init/InitializeFonts';
-import { View } from 'react-native';
+
+const Stack = createNativeStackNavigator();
 
 const App = () =>  {
   const [isLoaded, setLoaded] = useState(false);
@@ -35,7 +39,19 @@ const App = () =>  {
   }
 
   return (
-    <HomeScreen onLayout={onLayoutRootView} />
+    <View 
+      onLayout={onLayoutRootView}
+      style={{flex: 1}}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          <Stack.Screen name='Home' component={HomeScreen} />
+          <Stack.Screen name='SearchResult' component={SearchResultScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </View>
   );
 }
 

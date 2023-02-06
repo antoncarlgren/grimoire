@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   homeHeader: {
     fontSize: textSizes.xl * 2,
     color: colors.primaryRed,
+    textAlign: 'center'
   }
 });
 

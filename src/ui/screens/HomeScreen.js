@@ -1,15 +1,16 @@
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
 import { globalStyles } from '../../constants/styles/GlobalStyles';
 import ContentContainer from '../components/containers/ContentContainer';
 import SearchField from '../components/input/SearchField';
 import HomeHeader from '../components/text/HomeHeader';
 
-const HomeScreen = ({ onLayout }) =>  {
+const HomeScreen = ({ navigation }) =>  {
   return (
     <ContentContainer 
-      style={[styles.container]}
-      onLayout={onLayout}>
-      <View style={[globalStyles.centerContent]}>
+      style={[styles.container]}>
+      <KeyboardAvoidingView 
+        style={[globalStyles.centerContent]}
+        behavior='position'>
         <View style={[styles.homeImageWrapper]}>
           <Image
             style={[styles.homeImage]}
@@ -18,8 +19,10 @@ const HomeScreen = ({ onLayout }) =>  {
         <HomeHeader>
           GRIMOIRE
         </HomeHeader>
-        <SearchField placeholder='Search for spells'/>
-      </View>
+        <SearchField 
+          placeholder='Search for spells'
+          onSubmitEditing={() => navigation.navigate('SearchResult')}/>
+      </KeyboardAvoidingView>
     </ContentContainer>
   );
 }

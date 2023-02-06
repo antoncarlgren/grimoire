@@ -46,8 +46,11 @@ export const globalStyles = StyleSheet.create({
   mh20: {
     paddingHorizontal: 20
   },
-  rounded: {
+  roundedSmall: {
     borderRadius: 5
+  },
+  roundedLarge: {
+    borderRadius: 10
   },
   bgPrimary: {
     backgroundColor: colors.primaryBackground

@@ -2,11 +2,9 @@
 import { View, StyleSheet } from "react-native";
 import { globalStyles } from "../../../constants/styles/GlobalStyles";
 
-const ContentContainer = ({ children, style, onLayout }) => {
+const ContentContainer = ({ children, style }) => {
   return(
-    <View
-      onLayout={onLayout} 
-      style={[styles.container, globalStyles.p20, globalStyles.bgPrimary, style]}>
+    <View style={[styles.container, globalStyles.p20, globalStyles.bgPrimary, style]}>
       {children}
     </View>
   );
