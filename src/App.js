@@ -3,9 +3,11 @@ import { useState, useCallback, useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './ui/screens/HomeScreen';
-import SearchResultScreen from './ui/screens/SearchResultScreen';
+import Home from './ui/screens/Home';
+import SearchResult from './ui/screens/SearchResult';
 import { loadFonts } from './init/InitializeFonts';
+import { defaultOptions, searchResultOptions } from './navigation/StackOptions';
+import { StatusBar } from 'expo-status-bar';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,19 +41,25 @@ const App = () =>  {
   }
 
   return (
-    <View 
-      onLayout={onLayoutRootView}
-      style={{flex: 1}}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name='Home' component={HomeScreen} />
-          <Stack.Screen name='SearchResult' component={SearchResultScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </View>
+    <>
+    <StatusBar style='light'/>
+      <View 
+        onLayout={onLayoutRootView}
+        style={{flex: 1}}>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={defaultOptions}>
+            <Stack.Screen 
+              name='Home' 
+              component={Home}/>
+            <Stack.Screen 
+              name='SearchResult' 
+              component={SearchResult}
+              options={searchResultOptions}  />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </View>
+    </>
   );
 }
 

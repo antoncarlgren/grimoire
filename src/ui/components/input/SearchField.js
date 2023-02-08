@@ -1,6 +1,7 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import { globalStyles, texts } from "../../../constants/styles/GlobalStyles";
 import { colors } from "../../../constants/Colors";
+import normalize from "react-native-normalize";
 import { Feather } from "@expo/vector-icons";
 
 const SearchField = ({ placeholder, onSubmitEditing }) => {
@@ -24,7 +25,7 @@ const styles = StyleSheet.create({
   searchField: {
     alignSelf: 'stretch',
     textAlign: 'center',
-    paddingHorizontal: 15
+    paddingHorizontal: normalize(15)
   }
 });
 

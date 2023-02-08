@@ -1,8 +1,9 @@
+import normalize from 'react-native-normalize';
 export const textSizes = {
-  s: 14,
-  m: 16,
-  l: 18,
-  xl: 20
+  s: normalize(16),
+  m: normalize(18),
+  l: normalize(20),
+  xl: normalize(22)
 };
 
 export const fonts = {
