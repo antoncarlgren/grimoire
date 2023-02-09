@@ -3,33 +3,42 @@ import { getAllSpells } from '../../api/ApiClient';
 import { StyleSheet, FlatList } from 'react-native';
 import ContentContainer from '../components/containers/ContentContainer';
 import SpellCard from '../components/containers/SpellCard';
+import LoadingAnimation from '../components/LoadingAnimation';
 
 const SearchResult = ({ route, navigation }) =>  {
   const { query } = route.params;
+  const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
   
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
         const spellData = await getAllSpells(query);
         setItems([...items, ...spellData]);
+        setLoading(false);
     });
 
     return unsubscribe;
   }, [navigation]);
 
   const renderItem = useCallback(({ item }) => (
-    <SpellCard slug={item.slug} details={item} />
+    <SpellCard details={item} />
   ), []);
 
   return (
+
     <ContentContainer 
       style={[styles.container]}>
-      <FlatList 
-        style={[styles.results]}
-        data={items}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.slug} />
-    </ContentContainer>
+        { loading
+          ? 
+          <LoadingAnimation/>
+          :
+          <FlatList 
+          style={[styles.results]}
+          data={items}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.slug} />
+      }
+      </ContentContainer>
   );
 }
 
