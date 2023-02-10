@@ -8,6 +8,7 @@ import SearchResult from './ui/screens/SearchResult';
 import { loadFonts } from './init/InitializeFonts';
 import { defaultOptions, searchResultOptions } from './navigation/StackOptions';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,18 +45,18 @@ const App = () =>  {
     <>
     <StatusBar style='light'/>
       <View 
-        onLayout={onLayoutRootView}
-        style={{flex: 1}}>
+        onLayout={ onLayoutRootView }
+        style={{ flex: 1 }}>
         <NavigationContainer>
           <Stack.Navigator
-            screenOptions={defaultOptions}>
+            screenOptions={ defaultOptions }>
             <Stack.Screen 
               name='Home' 
-              component={Home}/>
+              component={ Home }/>
             <Stack.Screen 
               name='SearchResult' 
-              component={SearchResult}
-              options={searchResultOptions}  />
+              component={ SearchResult }
+              options={ searchResultOptions }  />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

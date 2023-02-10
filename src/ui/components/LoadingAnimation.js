@@ -4,14 +4,25 @@ import { colors } from "../../constants/Colors";
 import TextBody from "./text/TextBody";
 
 const LoadingAnimation = () => {
+  const loadingMessages = [
+    'Studying Grimoire...',
+    'Browsing Spellbook...',
+    'Unraveling Scrolls...',
+  ];
+
+  const getRandomMessage = () => {
+    var message = loadingMessages[Math.floor(Math.random()*loadingMessages.length)];
+    return message;
+  };
+
   return(
-    <View style={[styles.container]}>
+    <View style={ [styles.container] }>
       <ActivityIndicator 
         size='large'
-        style={[styles.indicator]}
-        color={colors.primaryRed}/>
-      <TextBody style={[styles.text]}>
-        Browsing Grimoire...
+        style={ [styles.indicator] }
+        color={ colors.primaryRed} />
+      <TextBody style={ [styles.text] }>
+        { getRandomMessage() }
       </TextBody>
     </View>
   );

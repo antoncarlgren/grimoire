@@ -5,7 +5,7 @@ import { texts, globalStyles } from "../../../constants/styles/GlobalStyles";
 
 const HomeHeader = ({ children }) => {
   return (
-    <Text style={[texts.header, globalStyles.mh20, styles.homeHeader]}>
+    <Text style={ [texts.header, globalStyles.mh20, styles.homeHeader] }>
       { children }
     </Text>
   );

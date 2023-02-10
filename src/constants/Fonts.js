@@ -1,4 +1,4 @@
-import normalize from 'react-native-normalize';
+import { normalize } from 'react-native-normalize';
 export const textSizes = {
   s: normalize(16),
   m: normalize(18),

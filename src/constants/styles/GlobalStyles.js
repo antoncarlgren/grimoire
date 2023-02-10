@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { colors, schoolColors } from "../Colors";
 import { fonts, textSizes } from "../Fonts";
-import normalize from "react-native-normalize";
+import { normalize } from "react-native-normalize";
 
 export const globalStyles = StyleSheet.create({
   flex: {

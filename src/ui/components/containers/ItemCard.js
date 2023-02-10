@@ -4,11 +4,11 @@ import { colors } from "../../../constants/Colors";
 import { globalStyles, schoolTextColors } from "../../../constants/styles/GlobalStyles";
 import TextBody from "../text/TextBody";
 
-const SpellCard = ({ details }) => {
+const ItemCard = ({ details, textStyle }) => {
   
   return(
-    <View style={[styles.card, globalStyles.mv10, globalStyles.p10, globalStyles.bgSecondary]}>
-      <TextBody style={[schoolTextColors[details.school]]}>
+    <View style={ [styles.card, globalStyles.mv10, globalStyles.p10, globalStyles.bgSecondary] }>
+      <TextBody style={ [textStyle] }>
         { details.name }
       </TextBody>
     </View>
@@ -25,4 +25,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SpellCard;
+export default ItemCard;

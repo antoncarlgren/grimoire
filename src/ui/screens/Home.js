@@ -1,6 +1,7 @@
 import { View, StyleSheet, Image, KeyboardAvoidingView } from 'react-native';
+import { paths } from '../../constants/ApiConfig';
 import { globalStyles } from '../../constants/styles/GlobalStyles';
-import normalize from 'react-native-normalize';
+import { normalize } from 'react-native-normalize';
 import ContentContainer from '../components/containers/ContentContainer';
 import SearchField from '../components/input/SearchField';
 import HomeHeader from '../components/text/HomeHeader';
@@ -11,24 +12,24 @@ const HomeScreen = ({ navigation }) =>  {
 
   return (
     <ContentContainer 
-      style={[styles.container]}>
+      style={ [styles.container] }>
       <KeyboardAvoidingView 
-        style={[globalStyles.centerContent]}
+        style={ [globalStyles.centerContent] }
         behavior='position'>
-        <View style={[styles.homeImageWrapper]}>
+        <View style={ [styles.homeImageWrapper] }>
           <Image
-            style={[styles.homeImage]}
-            source={require('../../assets/images/hat.png')}/>
+            style={ [styles.homeImage] }
+            source={ require('../../assets/images/hat.png') }/>
         </View>
         <HomeHeader>
           GRIMOIRE
         </HomeHeader>
         <SearchField 
           placeholder='Search for spells'
-          value={searchTerm}
-          onChangeText={(searchTerm) => setSearchTerm(searchTerm)}
-          onSubmitEditing={() => { navigation.navigate('SearchResult', {
-              query: { search: searchTerm } 
+          value={ searchTerm }
+          onChangeText={ (searchTerm) => setSearchTerm(searchTerm) }
+          onSubmitEditing={ () => { navigation.navigate('SearchResult', {
+              path: paths.spells,
             });
           }}/>
       </KeyboardAvoidingView>
