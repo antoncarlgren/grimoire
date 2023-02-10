@@ -9,3 +9,14 @@ export const colors = {
   primaryGreen: '#a6e3a1',
   primaryOrange: '#fab387'
 };
+
+export const schoolColors = {
+  abjuration: '#74c7ec',
+  conjuration: '#f9e2af',
+  divination: '#6c7086',
+  enchantment: '#f5c2e7',
+  evocation: '#f38ba8',
+  illusion: '#cba6f7',
+  necromancy: '#a6e3a1',
+  transmutation: '#fab387',
+}

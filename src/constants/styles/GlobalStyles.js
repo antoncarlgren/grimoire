@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
-import { colors } from "../Colors";
+import { colors, schoolColors } from "../Colors";
 import { fonts, textSizes } from "../Fonts";
+import { normalize } from "react-native-normalize";
 
 export const globalStyles = StyleSheet.create({
   flex: {
@@ -11,46 +12,46 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center'
   },
   p10: {
-    padding: 10
+    padding: normalize(10)
   },
   p20: {
-    padding: 20
+    padding: normalize(20)
   },
   m10: {
-    margin: 10
+    margin: normalize(10)
   },
   m20: {
-    margin: 20
+    margin: normalize(20)
   },
   pv10: {
-    paddingVertical: 10
+    paddingVertical: normalize(10)
   },
   pv20: {
-    paddingVertical: 20
+    paddingVertical: normalize(20)
   },
   ph10: {
-    paddingHorizontal: 10
+    paddingHorizontal: normalize(10)
   },
   ph20: {
-    paddingHorizontal: 10
+    paddingHorizontal: normalize(10)
   },
   mv10 : {
-    paddingVertical: 10
+    marginVertical: normalize(10)
   },
   mv20: {
-    paddingVertical: 20
+    marginVertical: normalize(20)
   },
   mh10: {
-    paddingHorizontal: 10
+    marginHorizontal: normalize(10)
   },
   mh20: {
-    paddingHorizontal: 20
+    marginHorizontal: normalize(20)
   },
   roundedSmall: {
     borderRadius: 5
   },
   roundedLarge: {
-    borderRadius: 10
+    borderRadius: normalize(10)
   },
   bgPrimary: {
     backgroundColor: colors.primaryBackground
@@ -64,6 +65,33 @@ export const globalStyles = StyleSheet.create({
   bgTransparent: {
     backgroundColor: 'rgba(0, 0, 0, 0)'
   },
+});
+
+export const schoolTextColors = StyleSheet.create({
+  abjuration: {
+    color: schoolColors.abjuration
+  },
+  conjuration: {
+    color: schoolColors.conjuration
+  },
+  divination : {
+    color: schoolColors.divination
+  },
+  enchantment: {
+    color: schoolColors.enchantment
+  },
+  evocation: {
+    color: schoolColors.evocation
+  },
+  illusion: {
+    color: schoolColors.illusion
+  },
+  necromancy: {
+    color: schoolColors.necromancy
+  },
+  transmutation: {
+    color: schoolColors.transmutation
+  }
 });
 
 export const texts = StyleSheet.create({

@@ -4,8 +4,8 @@ import { globalStyles } from "../../../constants/styles/GlobalStyles";
 
 const ContentContainer = ({ children, style }) => {
   return(
-    <View style={[styles.container, globalStyles.p20, globalStyles.bgPrimary, style]}>
-      {children}
+    <View style={ [styles.container, globalStyles.ph20, globalStyles.bgPrimary, style] }>
+      { children }
     </View>
   );
 }
