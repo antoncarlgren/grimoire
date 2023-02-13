@@ -8,12 +8,11 @@ import SearchResult from './ui/screens/SearchResult';
 import { loadFonts } from './init/InitializeFonts';
 import { defaultOptions, searchResultOptions } from './navigation/StackOptions';
 import { StatusBar } from 'expo-status-bar';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 
 const App = () =>  {
-  const [isLoaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
@@ -24,7 +23,7 @@ const App = () =>  {
         console.warn(ex);
       }
       finally {
-        setLoaded(true);
+        setLoading(false);
       }
     }
 
@@ -32,12 +31,12 @@ const App = () =>  {
   }, [])
 
   const onLayoutRootView = useCallback(async () => {
-    if(isLoaded) {
+    if(!loading) {
       await SplashScreen.hideAsync();
     }
-  }, [isLoaded]);
+  }, [loading]);
 
-  if(!isLoaded) {
+  if(loading) {
     return null;
   }
 
@@ -52,11 +51,11 @@ const App = () =>  {
             screenOptions={ defaultOptions }>
             <Stack.Screen 
               name='Home' 
-              component={ Home }/>
+              component={ Home } />
             <Stack.Screen 
               name='SearchResult' 
               component={ SearchResult }
-              options={ searchResultOptions }  />
+              options={ searchResultOptions } />
           </Stack.Navigator>
         </NavigationContainer>
       </View>

@@ -1,5 +1,8 @@
 import { colors } from "../constants/Colors";
 import { fonts } from "../constants/Fonts";
+import { globalStyles } from "../constants/styles/GlobalStyles";
+import SearchField from "../ui/components/input/SearchField";
+import NavigationHeader from "../ui/components/NavigationHeader";
 
 export const defaultOptions = {
   headerShown: false,
@@ -14,6 +17,19 @@ export const defaultOptions = {
 };
 
 export const searchResultOptions = {
-  headerTitle: 'Search Results',
-  headerShown: true
+  headerShown: true,
+  headerTitleContainerStyle: {
+    width: '50%'
+  },
+  headerTitleStyle: {
+    paddingHorizontal: 10,
+  },
+  header: () => (
+    <NavigationHeader>
+      <SearchField
+        style={ [globalStyles.mh10] }
+        placeholder='Refine your search' />
+    </NavigationHeader>
+  ),
+  animation: 'simple_push'
 };

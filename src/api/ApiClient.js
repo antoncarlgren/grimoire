@@ -23,20 +23,8 @@ export const getItemsFromApi = async (path) => {
   const url = paths.base + path;
   try {
     const combinedResults = await getItems(url, []);
-    const formattedResults = formatSpellSchoolStrings(combinedResults);
-    return formattedResults;
+    return combinedResults;
   } catch (error) {
     console.log(error);
   } 
-}
-
-export const getItemsByPage = async (path, pageNumber) => {
-  try {
-    const queryParameter = '?page=' + pageNumber;
-    const response = await instance.get(path + queryParameter);
-    const formattedResults = formatSpellSchoolStrings(response.data.results);
-    return formattedResults; 
-  } catch (error) {
-    console.log(error);
-  }
 }

@@ -7,7 +7,9 @@ export const colors = {
   primaryPurple: '#cba6f7',
   primaryRed: '#f38ba8',
   primaryGreen: '#a6e3a1',
-  primaryOrange: '#fab387'
+  primaryOrange: '#fab387',
+  primaryBlue: '#74c7ec',
+  primaryGrey: '#6c7086',
 };
 
 export const schoolColors = {

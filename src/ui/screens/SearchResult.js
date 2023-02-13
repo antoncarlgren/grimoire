@@ -1,31 +1,24 @@
-import { useCallback, useEffect, useState } from 'react';
-import { getItemsFromApi } from '../../api/ApiClient';
+import { useCallback, useEffect } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
-import { storeValue, loadValue } from '../../logic/Storage';
-import { globalStyles, schoolTextColors } from '../../constants/styles/GlobalStyles';
+import { globalStyles } from '../../constants/styles/GlobalStyles';
 import ContentContainer from '../components/containers/ContentContainer';
 import ItemCard from '../components/containers/ItemCard';
 import LoadingAnimation from '../components/LoadingAnimation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useDataInitializer } from '../../logic/hooks/UseDataInitializer';
+import { useApiClient } from '../../logic/hooks/UseApiClient';
+import { paths } from '../../constants/ApiConfig';
 
 const SearchResult = ({ route, navigation }) =>  {
   const { path } = route.params;
-  const [loading, setLoading] = useState(true);
-  const [items, setItems] = useState([]);
-  
-  const loadItems = async () => {
-    const data = await loadValue(path) ?? await getItemsFromApi(path);
-      storeValue(path, data);
-      setItems([...items, ...data]);
-  }
+  //const [items, loading, error] = useDataInitializer(path);
+  const [items, loading, error] = useApiClient(paths.base + path);
 
-  useEffect(() => {
+    useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
-      await loadItems();
-      setLoading(false);
+      
     });
 
-    return unsubscribe;
+    return unsubscribe;    
   }, [navigation]);
 
   const renderItem = useCallback(({ item, textStyle }) => (
@@ -33,18 +26,15 @@ const SearchResult = ({ route, navigation }) =>  {
   ), []);
 
   return (
-
     <ContentContainer 
       style={ [styles.contentContainer] }>
         { loading
-          ? 
-          <LoadingAnimation/>
-          :
-          <FlatList 
-          style={ [styles.results, globalStyles.ph10] }
-          data={ items }
-          renderItem={ renderItem }
-          keyExtractor={ (item) => item.slug } />
+          ? <LoadingAnimation/>
+          : <FlatList 
+              style={ [styles.results, globalStyles.ph10] }
+              data={ items }
+              renderItem={ renderItem }
+              keyExtractor={ (item) => item.slug } />
       }
       </ContentContainer>
   );
@@ -53,22 +43,6 @@ const SearchResult = ({ route, navigation }) =>  {
 const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 0,
-  },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  homeImageWrapper: {
-    marginTop: 60,
-    marginBottom: 20,
-  },
-  homeImage: {
-    width: 288,
-    height: 288,
-    resizeMode: 'contain'
-  },
-  titleWrapper: {
-    alignSelf: 'flex-start'
   },
   results: {
     width: '100%'

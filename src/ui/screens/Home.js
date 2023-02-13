@@ -3,12 +3,10 @@ import { paths } from '../../constants/ApiConfig';
 import { globalStyles } from '../../constants/styles/GlobalStyles';
 import { normalize } from 'react-native-normalize';
 import ContentContainer from '../components/containers/ContentContainer';
-import SearchField from '../components/input/SearchField';
 import HomeHeader from '../components/text/HomeHeader';
-import { useState } from 'react';
+import MainButton from '../components/input/MainButton';
 
 const HomeScreen = ({ navigation }) =>  {
-  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <ContentContainer 
@@ -24,14 +22,12 @@ const HomeScreen = ({ navigation }) =>  {
         <HomeHeader>
           GRIMOIRE
         </HomeHeader>
-        <SearchField 
-          placeholder='Search for spells'
-          value={ searchTerm }
-          onChangeText={ (searchTerm) => setSearchTerm(searchTerm) }
-          onSubmitEditing={ () => { navigation.navigate('SearchResult', {
-              path: paths.spells,
-            });
-          }}/>
+        <MainButton 
+          title='Spells'
+          onPress={ () => { navigation.navigate('SearchResult', {
+            path: paths.spells,
+          });
+        }}/>
       </KeyboardAvoidingView>
     </ContentContainer>
   );

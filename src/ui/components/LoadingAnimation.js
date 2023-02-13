@@ -1,7 +1,9 @@
 import { ActivityIndicator, View, StyleSheet } from "react-native"
-import { textSizes } from "../../constants/Fonts";
+import { fontSizes } from "../../constants/Fonts";
 import { colors } from "../../constants/Colors";
 import TextBody from "./text/TextBody";
+import { normalize } from "react-native-normalize";
+import { getRandomItem } from "../../utils/ArrayUtils";
 
 const LoadingAnimation = () => {
   const loadingMessages = [
@@ -10,11 +12,6 @@ const LoadingAnimation = () => {
     'Unraveling Scrolls...',
   ];
 
-  const getRandomMessage = () => {
-    var message = loadingMessages[Math.floor(Math.random()*loadingMessages.length)];
-    return message;
-  };
-
   return(
     <View style={ [styles.container] }>
       <ActivityIndicator 
@@ -22,7 +19,7 @@ const LoadingAnimation = () => {
         style={ [styles.indicator] }
         color={ colors.primaryRed} />
       <TextBody style={ [styles.text] }>
-        { getRandomMessage() }
+        { getRandomItem(loadingMessages) }
       </TextBody>
     </View>
   );
@@ -35,10 +32,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   indicator: {
-    marginBottom: 30,
+    marginBottom: normalize(30),
   },
   text: {
-    fontSize: textSizes.l,
+    fontSize: fontSizes.l,
     color: colors.primaryText
   }
 });
