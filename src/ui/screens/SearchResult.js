@@ -1,25 +1,17 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { globalStyles } from '../../constants/styles/GlobalStyles';
 import ContentContainer from '../components/containers/ContentContainer';
 import ItemCard from '../components/containers/ItemCard';
 import LoadingAnimation from '../components/LoadingAnimation';
-import { useDataInitializer } from '../../logic/hooks/UseDataInitializer';
-import { useApiClient } from '../../logic/hooks/UseApiClient';
+import { useDataSource } from '../../hooks/UseDataSource'
 import { paths } from '../../constants/ApiConfig';
 
 const SearchResult = ({ route, navigation }) =>  {
   const { path } = route.params;
   //const [items, loading, error] = useDataInitializer(path);
-  const [items, loading, error] = useApiClient(paths.base + path);
-
-    useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
-      
-    });
-
-    return unsubscribe;    
-  }, [navigation]);
+  //const [items, error, loading] = useApiClient(paths.base + path);
+  const [items, loading, error] = useDataSource(paths.base, path);
 
   const renderItem = useCallback(({ item, textStyle }) => (
     <ItemCard details={ item } textStyle={ textStyle } />
