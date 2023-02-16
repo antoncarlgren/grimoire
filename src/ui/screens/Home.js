@@ -26,6 +26,8 @@ const HomeScreen = ({ navigation }) =>  {
           title='Spells'
           onPress={ () => { navigation.navigate('SearchResult', {
             path: paths.spells,
+            keys: ['name'],
+            placeholder: 'Search Grimoire'
           });
         }}/>
       </KeyboardAvoidingView>

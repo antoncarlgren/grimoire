@@ -1,17 +1,18 @@
+import { useState } from "react";
 import { StyleSheet, TextInput } from "react-native";
 import { globalStyles, texts } from "../../../constants/styles/GlobalStyles";
 import { colors } from "../../../constants/Colors";
 import { normalize } from "react-native-normalize";
 
 const SearchField = ({ value, placeholder, onChangeText, onSubmitEditing, style }) => {
+  const[text, setText] = useState(value);
 
   return(
     <>
       <TextInput 
         style={ [texts.regular, globalStyles.pv10, globalStyles.mh10, globalStyles.roundedLarge, globalStyles.bgTertiary, styles.searchField, style] }
-        value={ value }
+        value={ text }
         placeholder={ placeholder }
-        autoCapitalize='words'
         selectionColor={ colors.primaryText }
         onChangeText={ onChangeText }
         onSubmitEditing={ onSubmitEditing }/>
