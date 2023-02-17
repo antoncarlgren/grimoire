@@ -67,33 +67,6 @@ export const globalStyles = StyleSheet.create({
   },
 });
 
-export const schoolTextColors = StyleSheet.create({
-  abjuration: {
-    color: schoolColors.abjuration
-  },
-  conjuration: {
-    color: schoolColors.conjuration
-  },
-  divination : {
-    color: schoolColors.divination
-  },
-  enchantment: {
-    color: schoolColors.enchantment
-  },
-  evocation: {
-    color: schoolColors.evocation
-  },
-  illusion: {
-    color: schoolColors.illusion
-  },
-  necromancy: {
-    color: schoolColors.necromancy
-  },
-  transmutation: {
-    color: schoolColors.transmutation
-  }
-});
-
 export const texts = StyleSheet.create({
   header: {
     fontSize: fontSizes.xl,

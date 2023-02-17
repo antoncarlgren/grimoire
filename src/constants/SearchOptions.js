@@ -1,5 +1,14 @@
-export const keys = {
-    spells: [
+import * as Colors from "./Colors";
+import { paths } from "./ApiConfig";
+
+export const spellSearchOptions = {
+    path: paths.spells,
+    placeholder: "Search Grimoire",
+    cardColors: {
+        highlighting: Colors.schoolTextColors,
+        key: "school",
+    },
+    keys: [
         {
             target: "name",
             key: "name",

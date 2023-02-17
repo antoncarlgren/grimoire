@@ -1,14 +1,22 @@
-import { View, StyleSheet } from "react-native";
-import { colors } from "../../../constants/Colors";
-import {
-    globalStyles,
-    schoolTextColors,
-} from "../../../constants/styles/GlobalStyles";
+import { useState, memo } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { globalStyles } from "../../../constants/styles/GlobalStyles";
 import TextBody from "../text/TextBody";
 
-const ItemCard = ({ details, textStyle }) => {
+const ItemCard = ({ details, colors }) => {
+    const [pressed, setPressed] = useState(false);
+    // Get text color by matching the value of the key property with the property of the same name of the details object
+    const colorKey = details[colors["key"]]?.toLowerCase();
+    const textColor = colors["highlighting"][colorKey];
+
+    const setPressedStyle = () => {
+        setPressed(!pressed);
+        return pressed ? null : styles.card;
+    };
+
     return (
-        <View
+        <TouchableOpacity
+            activeOpacity={0.5}
             style={[
                 styles.card,
                 globalStyles.mv10,
@@ -16,8 +24,10 @@ const ItemCard = ({ details, textStyle }) => {
                 globalStyles.bgSecondary,
             ]}
         >
-            <TextBody style={[textStyle]}>{details.name}</TextBody>
-        </View>
+            <TextBody style={[textColor]} onPress={() => setPressedStyle()}>
+                {details.name}
+            </TextBody>
+        </TouchableOpacity>
     );
 };
 
@@ -31,4 +41,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ItemCard;
+export default memo(ItemCard);
