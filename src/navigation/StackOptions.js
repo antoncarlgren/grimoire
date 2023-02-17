@@ -5,24 +5,22 @@ import SearchField from "../ui/components/input/SearchField";
 import NavigationSearchHeader from "../ui/components/NavigationSearchHeader";
 
 export const defaultOptions = {
-  headerShown: false,
-  headerTitleAlign: 'center',
-  headerTintColor: colors.primaryRed,
-  headerTitleStyle: {
-    fontFamily: fonts.bold,
-  },
-  headerStyle: {
-    backgroundColor: colors.primaryBackground
-  }
+    headerShown: false,
+    headerTitleAlign: "center",
+    headerTintColor: colors.primaryRed,
+    headerTitleStyle: {
+        fontFamily: fonts.bold,
+    },
+    headerStyle: {
+        backgroundColor: colors.primaryBackground,
+    },
 };
 
 export const searchResultOptions = {
-  headerShown: true,
+    headerShown: true,
 
-  headerTitleStyle: {
-    paddingHorizontal: 10,
-  },
-  header: () => (
-    <NavigationSearchHeader />
-  )
+    headerTitleStyle: {
+        paddingHorizontal: 10,
+    },
+    header: () => <NavigationSearchHeader />,
 };
