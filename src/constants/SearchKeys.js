@@ -25,5 +25,18 @@ export const keys = {
             key: "ritual",
             alias: "r",
         },
+        {
+            target: "desc",
+            key: "desc",
+            alias: "d",
+        },
+        {
+            target: "components",
+            key: "comp",
+        },
+        {
+            target: "concentration",
+            key: "conc",
+        },
     ],
 };

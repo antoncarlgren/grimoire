@@ -28,7 +28,6 @@ export const useSearch = (source, searchKeys, query) => {
         if (Object.keys(parsedPairs).length === 0 && query !== "") {
             parsedPairs["name"] = query.trim();
         }
-        console.log("here");
         setSearchPairs(parsedPairs);
     }, [query]);
 
