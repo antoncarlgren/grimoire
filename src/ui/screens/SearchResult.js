@@ -1,78 +1,64 @@
-import { useCallback, useEffect, useState } from 'react';
-import { getItemsFromApi } from '../../api/ApiClient';
-import { StyleSheet, FlatList } from 'react-native';
-import { storeValue, loadValue } from '../../logic/Storage';
-import { globalStyles, schoolTextColors } from '../../constants/styles/GlobalStyles';
-import ContentContainer from '../components/containers/ContentContainer';
-import ItemCard from '../components/containers/ItemCard';
-import LoadingAnimation from '../components/LoadingAnimation';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { StyleSheet, FlatList } from "react-native";
+import { globalStyles } from "../../constants/styles/GlobalStyles";
+import ContentContainer from "../components/containers/ContentContainer";
+import ItemCard from "../components/containers/ItemCard";
+import LoadingAnimation from "../components/LoadingAnimation";
+import { useDataSource } from "../../hooks/UseDataSource";
+import { useSearch } from "../../hooks/UseSearch";
+import { paths } from "../../constants/ApiConfig";
+import NavigationSearchHeader from "../components/NavigationSearchHeader";
+import { searchResultOptions } from "../../navigation/StackOptions";
 
-const SearchResult = ({ route, navigation }) =>  {
-  const { path } = route.params;
-  const [loading, setLoading] = useState(true);
-  const [items, setItems] = useState([]);
-  
-  const loadItems = async () => {
-    const data = await loadValue(path) ?? await getItemsFromApi(path);
-      storeValue(path, data);
-      setItems([...items, ...data]);
-  }
+const SearchResult = ({ route, navigation }) => {
+    const { path, keys, placeholder } = route.params;
 
-  useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', async () => {
-      await loadItems();
-      setLoading(false);
-    });
+    const [items, loading, error] = useDataSource(paths.base, path);
+    const [query, setQuery] = useState("");
+    const filteredItems = useSearch(items, keys, query);
 
-    return unsubscribe;
-  }, [navigation]);
+    useEffect(() => {
+        navigation.setOptions({
+            header: () => (
+                <NavigationSearchHeader
+                    placeholder={placeholder}
+                    onChangeText={setQuery}
+                    value={query}
+                />
+            ),
+        });
+    }, []);
 
-  const renderItem = useCallback(({ item, textStyle }) => (
-    <ItemCard details={ item } textStyle={ textStyle } />
-  ), []);
+    const renderItem = useCallback(
+        ({ item, textStyle }) => (
+            <ItemCard details={item} textStyle={textStyle} />
+        ),
+        []
+    );
 
-  return (
-
-    <ContentContainer 
-      style={ [styles.contentContainer] }>
-        { loading
-          ? 
-          <LoadingAnimation/>
-          :
-          <FlatList 
-          style={ [styles.results, globalStyles.ph10] }
-          data={ items }
-          renderItem={ renderItem }
-          keyExtractor={ (item) => item.slug } />
-      }
-      </ContentContainer>
-  );
-}
+    return (
+        <ContentContainer style={[styles.contentContainer]}>
+            {loading ? (
+                <LoadingAnimation />
+            ) : (
+                <FlatList
+                    style={[styles.results, globalStyles.ph10]}
+                    data={filteredItems}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.slug}
+                />
+            )}
+        </ContentContainer>
+    );
+};
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    paddingHorizontal: 0,
-  },
-  container: {
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  homeImageWrapper: {
-    marginTop: 60,
-    marginBottom: 20,
-  },
-  homeImage: {
-    width: 288,
-    height: 288,
-    resizeMode: 'contain'
-  },
-  titleWrapper: {
-    alignSelf: 'flex-start'
-  },
-  results: {
-    width: '100%'
-  }
+    contentContainer: {
+        paddingHorizontal: 0,
+    },
+    results: {
+        width: "100%",
+    },
 });
 
 export default SearchResult;

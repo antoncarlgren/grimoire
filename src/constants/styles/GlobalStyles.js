@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { colors, schoolColors } from "../Colors";
-import { fonts, textSizes } from "../Fonts";
+import { fonts, fontSizes } from "../Fonts";
 import { normalize } from "react-native-normalize";
 
 export const globalStyles = StyleSheet.create({
@@ -96,12 +96,12 @@ export const schoolTextColors = StyleSheet.create({
 
 export const texts = StyleSheet.create({
   header: {
-    fontSize: textSizes.xl,
+    fontSize: fontSizes.xl,
     fontFamily: fonts.bold,
     color: colors.primaryText
   },
   regular: {
-    fontSize: textSizes.m,
+    fontSize: fontSizes.m,
     fontFamily: fonts.regular,
     color: colors.primaryText
   }
