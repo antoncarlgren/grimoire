@@ -1,7 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
+import { useDebounce } from "./useDebounce";
 
-export const useSearch = (source, searchKeys, query) => {
+export const useSearch = (source, searchKeys, query, delay = 250) => {
     const [searchPairs, setSearchPairs] = useState({});
+    const debouncedQuery = useDebounce(query, delay);
 
     // Parse the provided query string into pairs to be matched against the source
     useEffect(() => {
@@ -29,9 +31,8 @@ export const useSearch = (source, searchKeys, query) => {
             parsedPairs["name"] = query.trim();
         }
         setSearchPairs(parsedPairs);
-    }, [query]);
+    }, [debouncedQuery]);
 
-    // TODO: fix filtering
     const filteredSource = useMemo(() => {
         if (Object.values(searchPairs).every((value) => value === "")) {
             return source;
@@ -40,8 +41,9 @@ export const useSearch = (source, searchKeys, query) => {
         const filteredItems = source.filter((item) => {
             return Object.keys(searchPairs).every((key) => {
                 return (
-                    item[key] !== undefined &&
+                    item[key] != null &&
                     item[key]
+                        .toString()
                         .toLowerCase()
                         .includes(searchPairs[key].toLowerCase())
                 );

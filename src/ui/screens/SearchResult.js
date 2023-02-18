@@ -4,15 +4,14 @@ import { globalStyles } from "../../constants/styles/GlobalStyles";
 import ContentContainer from "../components/containers/ContentContainer";
 import ItemCard from "../components/containers/ItemCard";
 import LoadingAnimation from "../components/LoadingAnimation";
-import { useDataSource } from "../../hooks/UseDataSource";
-import { useSearch } from "../../hooks/UseSearch";
+import { useDataSource } from "../../hooks/useDataSource";
+import { useSearch } from "../../hooks/useSearch";
 import { paths } from "../../constants/ApiConfig";
 import NavigationSearchHeader from "../components/NavigationSearchHeader";
 import { searchResultOptions } from "../../navigation/StackOptions";
 
 const SearchResult = ({ route, navigation }) => {
-    const { path, keys, placeholder } = route.params;
-
+    const { path, placeholder, cardColors, keys } = route.params;
     const [items, loading, error] = useDataSource(paths.base, path);
     const [query, setQuery] = useState("");
     const filteredItems = useSearch(items, keys, query);
@@ -29,12 +28,9 @@ const SearchResult = ({ route, navigation }) => {
         });
     }, []);
 
-    const renderItem = useCallback(
-        ({ item, textStyle }) => (
-            <ItemCard details={item} textStyle={textStyle} />
-        ),
-        []
-    );
+    const renderItem = ({ item }) => {
+        return <ItemCard details={item} colors={cardColors} />;
+    };
 
     return (
         <ContentContainer style={[styles.contentContainer]}>
@@ -43,6 +39,8 @@ const SearchResult = ({ route, navigation }) => {
             ) : (
                 <FlatList
                     style={[styles.results, globalStyles.ph10]}
+                    maxToRenderPerBatch={25}
+                    windowSize={41}
                     data={filteredItems}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.slug}

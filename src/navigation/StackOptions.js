@@ -18,7 +18,6 @@ export const defaultOptions = {
 
 export const searchResultOptions = {
     headerShown: true,
-
     headerTitleStyle: {
         paddingHorizontal: 10,
     },

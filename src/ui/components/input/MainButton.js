@@ -5,7 +5,7 @@ import { fontSizes } from "../../../constants/Fonts";
 import TextBody from "../text/TextBody";
 import { normalize } from "react-native-normalize";
 
-const MainButton = ({ onPress, title, style, titleStyle }) => {
+const MainButton = ({ onPress, title, style, titleStyle, color }) => {
     return (
         <TouchableOpacity
             onPress={onPress}
@@ -18,7 +18,9 @@ const MainButton = ({ onPress, title, style, titleStyle }) => {
                 style,
             ]}
         >
-            <TextBody style={[styles.titleStyle, titleStyle]}>{title}</TextBody>
+            <TextBody style={[styles.titleStyle, titleStyle, { color: color }]}>
+                {title}
+            </TextBody>
         </TouchableOpacity>
     );
 };

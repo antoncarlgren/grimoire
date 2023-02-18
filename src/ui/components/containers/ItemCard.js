@@ -1,29 +1,45 @@
-import { View, StyleSheet } from "react-native";
-import { colors } from "../../../constants/Colors";
-import {
-    globalStyles,
-    schoolTextColors,
-} from "../../../constants/styles/GlobalStyles";
+import { useState, memo } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { globalStyles, texts } from "../../../constants/styles/GlobalStyles";
 import TextBody from "../text/TextBody";
 
-const ItemCard = ({ details, textStyle }) => {
+const ItemCard = ({ details, colors }) => {
+    const [pressed, setPressed] = useState(false);
+    // Get text color by matching the value of the key property with the property of the same name of the details object
+    const colorKey = details[colors["key"]]?.toLowerCase().replace(" ", "");
+    const textColor = colors["highlighting"][colorKey];
+
     return (
-        <View
+        <TouchableOpacity
+            onPress={() => setPressed(!pressed)}
+            activeOpacity={0.5}
             style={[
                 styles.card,
-                globalStyles.mv10,
                 globalStyles.p10,
+                globalStyles.mv10,
                 globalStyles.bgSecondary,
             ]}
         >
-            <TextBody style={[textStyle]}>{details.name}</TextBody>
-        </View>
+            <TextBody shrink={true} style={[texts.card, textColor]}>
+                {details.name}
+            </TextBody>
+            <TextBody
+                shrink={false}
+                style={[
+                    texts.regular,
+                    globalStyles.p20,
+                    !pressed ? { display: "none" } : null,
+                ]}
+            >
+                {details.desc}
+            </TextBody>
+        </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
-        flexDirection: "row",
+        flexDirection: "column",
         borderRadius: 6,
         width: "100%",
         alignItems: "center",
@@ -31,4 +47,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ItemCard;
+export default memo(ItemCard);
