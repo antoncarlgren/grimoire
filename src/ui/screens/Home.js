@@ -8,6 +8,7 @@ import HomeHeader from "../components/text/HomeHeader";
 import MainButton from "../components/input/MainButton";
 import { searchResultOptions } from "../../navigation/StackOptions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { colors } from "../../constants/Colors";
 
 const HomeScreen = ({ navigation }) => {
     return (
@@ -25,6 +26,7 @@ const HomeScreen = ({ navigation }) => {
                 <HomeHeader>GRIMOIRE</HomeHeader>
                 <MainButton
                     title="Spells"
+                    color={colors.primaryBlue}
                     onPress={() => {
                         navigation.navigate(
                             "SearchResult",
@@ -33,7 +35,18 @@ const HomeScreen = ({ navigation }) => {
                     }}
                 />
                 <MainButton
+                    title="Magic Items"
+                    color={colors.primaryOrange}
+                    onPress={() => {
+                        navigation.navigate(
+                            "SearchResult",
+                            SearchOptions.magicItemSearchOptions
+                        );
+                    }}
+                />
+                <MainButton
                     title="fuck up the database"
+                    color={colors.primaryRed}
                     onPress={() => AsyncStorage.clear()}
                 />
             </KeyboardAvoidingView>

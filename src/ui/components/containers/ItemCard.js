@@ -6,7 +6,7 @@ import TextBody from "../text/TextBody";
 const ItemCard = ({ details, colors }) => {
     const [pressed, setPressed] = useState(false);
     // Get text color by matching the value of the key property with the property of the same name of the details object
-    const colorKey = details[colors["key"]]?.toLowerCase();
+    const colorKey = details[colors["key"]]?.toLowerCase().replace(" ", "");
     const textColor = colors["highlighting"][colorKey];
 
     return (

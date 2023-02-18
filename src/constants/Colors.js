@@ -40,3 +40,21 @@ export const schoolTextColors = StyleSheet.create({
         color: "#fab387",
     },
 });
+
+export const rarityTextColors = StyleSheet.create({
+    common: {
+        color: "#6c7086",
+    },
+    uncommon: {
+        color: "#a6e3a1",
+    },
+    rare: {
+        color: "#74c7ec",
+    },
+    veryrare: {
+        color: "#cba6f7",
+    },
+    legendary: {
+        color: "#fab387",
+    },
+});

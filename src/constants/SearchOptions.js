@@ -49,3 +49,39 @@ export const spellSearchOptions = {
         },
     ],
 };
+
+export const magicItemSearchOptions = {
+    path: paths.magicItems,
+    placeholder: "Search Treasure Chest",
+    cardColors: {
+        highlighting: Colors.rarityTextColors,
+        key: "rarity",
+    },
+    keys: [
+        {
+            target: "name",
+            key: "name",
+            alias: "n",
+        },
+        {
+            target: "rarity",
+            key: "rarity",
+            alias: "r",
+        },
+        {
+            target: "type",
+            key: "type",
+            alias: "t",
+        },
+        {
+            target: "desc",
+            key: "desc",
+            alias: "d",
+        },
+        {
+            target: "requires_attunement",
+            key: "attune",
+            alias: "a",
+        },
+    ],
+};
