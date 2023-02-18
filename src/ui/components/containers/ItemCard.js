@@ -1,6 +1,6 @@
 import { useState, memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { globalStyles } from "../../../constants/styles/GlobalStyles";
+import { globalStyles, texts } from "../../../constants/styles/GlobalStyles";
 import TextBody from "../text/TextBody";
 
 const ItemCard = ({ details, colors }) => {
@@ -9,23 +9,29 @@ const ItemCard = ({ details, colors }) => {
     const colorKey = details[colors["key"]]?.toLowerCase();
     const textColor = colors["highlighting"][colorKey];
 
-    const setPressedStyle = () => {
-        setPressed(!pressed);
-        return pressed ? null : styles.card;
-    };
-
     return (
         <TouchableOpacity
+            onPress={() => setPressed(!pressed)}
             activeOpacity={0.5}
             style={[
                 styles.card,
-                globalStyles.mv10,
                 globalStyles.p10,
+                globalStyles.mv10,
                 globalStyles.bgSecondary,
             ]}
         >
-            <TextBody style={[textColor]} onPress={() => setPressedStyle()}>
+            <TextBody shrink={true} style={[texts.card, textColor]}>
                 {details.name}
+            </TextBody>
+            <TextBody
+                shrink={false}
+                style={[
+                    texts.regular,
+                    globalStyles.p20,
+                    !pressed ? { display: "none" } : null,
+                ]}
+            >
+                {details.desc}
             </TextBody>
         </TouchableOpacity>
     );
@@ -33,7 +39,7 @@ const ItemCard = ({ details, colors }) => {
 
 const styles = StyleSheet.create({
     card: {
-        flexDirection: "row",
+        flexDirection: "column",
         borderRadius: 6,
         width: "100%",
         alignItems: "center",

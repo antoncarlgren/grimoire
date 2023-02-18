@@ -58,7 +58,7 @@ export const useDataSource = (root, path) => {
         };
 
         loadData();
-    }, []);
+    }, [root, path]);
 
     return [data, loading, error];
 };

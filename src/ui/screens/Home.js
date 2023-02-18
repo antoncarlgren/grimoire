@@ -7,6 +7,7 @@ import ContentContainer from "../components/containers/ContentContainer";
 import HomeHeader from "../components/text/HomeHeader";
 import MainButton from "../components/input/MainButton";
 import { searchResultOptions } from "../../navigation/StackOptions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const HomeScreen = ({ navigation }) => {
     return (
@@ -30,6 +31,10 @@ const HomeScreen = ({ navigation }) => {
                             SearchOptions.spellSearchOptions
                         );
                     }}
+                />
+                <MainButton
+                    title="fuck up the database"
+                    onPress={() => AsyncStorage.clear()}
                 />
             </KeyboardAvoidingView>
         </ContentContainer>

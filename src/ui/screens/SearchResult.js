@@ -12,7 +12,6 @@ import { searchResultOptions } from "../../navigation/StackOptions";
 
 const SearchResult = ({ route, navigation }) => {
     const { path, placeholder, cardColors, keys } = route.params;
-
     const [items, loading, error] = useDataSource(paths.base, path);
     const [query, setQuery] = useState("");
     const filteredItems = useSearch(items, keys, query);
@@ -29,10 +28,9 @@ const SearchResult = ({ route, navigation }) => {
         });
     }, []);
 
-    const renderItem = useCallback(
-        ({ item }) => <ItemCard details={item} colors={cardColors} />,
-        []
-    );
+    const renderItem = ({ item }) => {
+        return <ItemCard details={item} colors={cardColors} />;
+    };
 
     return (
         <ContentContainer style={[styles.contentContainer]}>
