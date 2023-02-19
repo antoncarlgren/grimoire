@@ -1,5 +1,6 @@
-import { View, StyleSheet } from "react-native";
-import { globalStyles } from "../../../constants/styles/GlobalStyles";
+import { useState, memo } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { globalStyles, texts } from "../../../constants/styles/GlobalStyles";
 import TextBody from "../text/TextBody";
 
 const ItemCard = ({ details, colors }) => {
