@@ -6,7 +6,6 @@ import * as SearchOptions from "../../constants/SearchOptions";
 import ContentContainer from "../components/containers/ContentContainer";
 import HomeHeader from "../components/text/HomeHeader";
 import MainButton from "../components/input/MainButton";
-import { searchResultOptions } from "../../navigation/StackOptions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { colors } from "../../constants/Colors";
 
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     homeImageWrapper: {
-        marginTop: normalize(60),
+        marginTop: normalize(20),
         marginBottom: normalize(20),
     },
     homeImage: {

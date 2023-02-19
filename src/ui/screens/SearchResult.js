@@ -7,8 +7,7 @@ import LoadingAnimation from "../components/LoadingAnimation";
 import { useDataSource } from "../../hooks/useDataSource";
 import { useSearch } from "../../hooks/useSearch";
 import { paths } from "../../constants/ApiConfig";
-import NavigationSearchHeader from "../components/NavigationSearchHeader";
-import { searchResultOptions } from "../../navigation/StackOptions";
+import NavigationHeader from "../components/NavigationHeader";
 
 const SearchResult = ({ route, navigation }) => {
     const { path, placeholder, cardColors, keys } = route.params;
@@ -19,7 +18,9 @@ const SearchResult = ({ route, navigation }) => {
     useEffect(() => {
         navigation.setOptions({
             header: () => (
-                <NavigationSearchHeader
+                <NavigationHeader
+                    search={true}
+                    back={true}
                     placeholder={placeholder}
                     onChangeText={setQuery}
                     value={query}

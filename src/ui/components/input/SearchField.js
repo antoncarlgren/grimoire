@@ -4,28 +4,19 @@ import { globalStyles, texts } from "../../../constants/styles/GlobalStyles";
 import { colors } from "../../../constants/Colors";
 import { normalize } from "react-native-normalize";
 
-const SearchField = ({
-    value,
-    placeholder,
-    onChangeText,
-    onSubmitEditing,
-    style,
-}) => {
-    const [text, setText] = useState(value);
-
+const SearchField = ({ placeholder, onChangeText, onSubmitEditing, style }) => {
     return (
         <>
             <TextInput
                 style={[
-                    texts.regular,
-                    globalStyles.pv10,
+                    texts.searchField,
+                    globalStyles.p10,
                     globalStyles.mh10,
                     globalStyles.roundedLarge,
-                    globalStyles.bgTertiary,
+                    globalStyles.bgPrimary,
                     styles.searchField,
                     style,
                 ]}
-                value={text}
                 placeholder={placeholder}
                 selectionColor={colors.primaryText}
                 onChangeText={onChangeText}
@@ -37,7 +28,6 @@ const SearchField = ({
 
 const styles = StyleSheet.create({
     searchField: {
-        marginBottom: normalize(10),
         flex: 1,
         textAlign: "center",
     },
