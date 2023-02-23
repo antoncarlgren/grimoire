@@ -83,4 +83,9 @@ export const texts = StyleSheet.create({
         fontFamily: fonts.regular,
         color: colors.primaryText,
     },
+    searchField: {
+        fontSize: fontSizes.l,
+        fontFamily: fonts.regular,
+        color: colors.primaryText,
+    },
 });

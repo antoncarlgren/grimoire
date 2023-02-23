@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAsyncStorage } from "@react-native-async-storage/async-storage";
 
-export const useDataSource = (root, path) => {
+export const useDataInitializer = (root, path) => {
     const [data, setData] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
@@ -56,8 +56,6 @@ export const useDataSource = (root, path) => {
                 await getItemFromApi(root + path, []);
             }
         };
-
-        console.log(error);
         loadData();
     }, [root, path]);
 

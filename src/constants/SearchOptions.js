@@ -3,7 +3,6 @@ import { paths } from "./ApiConfig";
 
 export const spellSearchOptions = {
     path: paths.spells,
-    placeholder: "Search Grimoire",
     cardColors: {
         highlighting: Colors.schoolTextColors,
         key: "school",
@@ -52,7 +51,6 @@ export const spellSearchOptions = {
 
 export const magicItemSearchOptions = {
     path: paths.magicItems,
-    placeholder: "Search Treasure Chest",
     cardColors: {
         highlighting: Colors.rarityTextColors,
         key: "rarity",
