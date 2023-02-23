@@ -1,10 +1,11 @@
-import { useState, memo } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { globalStyles, texts } from "../../../constants/styles/GlobalStyles";
 import TextBody from "../text/TextBody";
+import { useNavigation } from "@react-navigation/core";
 
-const ItemCard = ({ details, colors }) => {
-    const [pressed, setPressed] = useState(false);
+const ItemCard = ({ slug, title, colors }) => {
+    const navigation = useNavigation();
+
     // Get text color by matching the value of the key property with the property of the same name of the details object
     const colorKey = details[colors["key"]]?.toLowerCase().replace(" ", "");
     const textColor = colors["highlighting"][colorKey];
@@ -21,17 +22,7 @@ const ItemCard = ({ details, colors }) => {
             ]}
         >
             <TextBody shrink={true} style={[texts.card, textColor]}>
-                {details.name}
-            </TextBody>
-            <TextBody
-                shrink={false}
-                style={[
-                    texts.regular,
-                    globalStyles.p20,
-                    !pressed ? { display: "none" } : null,
-                ]}
-            >
-                {details.desc}
+                {title}
             </TextBody>
         </TouchableOpacity>
     );
@@ -47,4 +38,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default memo(ItemCard);
+export default ItemCard;
