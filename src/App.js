@@ -10,7 +10,10 @@ import Home from "./ui/screens/Home";
 import SearchResult from "./ui/screens/SearchResult";
 import { loadFonts } from "./init/InitializeFonts";
 import { defaultOptions, searchResultOptions } from "./navigation/StackOptions";
+import RealmContext from "./realm/RealmConfig";
+import LoadingAnimation from "./ui/components/LoadingAnimation";
 
+const { RealmProvider } = RealmContext;
 const Stack = createNativeStackNavigator();
 
 const Main = () => {
@@ -41,20 +44,22 @@ const Main = () => {
     }
 
     return (
-        <PaperProvider>
-            <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
-                <NavigationContainer>
-                    <Stack.Navigator screenOptions={defaultOptions}>
-                        <Stack.Screen name="Home" component={Home} />
-                        <Stack.Screen
-                            name="SearchResult"
-                            component={SearchResult}
-                            options={searchResultOptions}
-                        />
-                    </Stack.Navigator>
-                </NavigationContainer>
-            </View>
-        </PaperProvider>
+        <RealmProvider fallback={() => <LoadingAnimation />}>
+            <PaperProvider>
+                <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
+                    <NavigationContainer>
+                        <Stack.Navigator screenOptions={defaultOptions}>
+                            <Stack.Screen name="Home" component={Home} />
+                            <Stack.Screen
+                                name="SearchResult"
+                                component={SearchResult}
+                                options={searchResultOptions}
+                            />
+                        </Stack.Navigator>
+                    </NavigationContainer>
+                </View>
+            </PaperProvider>
+        </RealmProvider>
     );
 };
 
