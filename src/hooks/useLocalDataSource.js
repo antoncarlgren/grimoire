@@ -1,14 +1,15 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 import RealmContext, { Spell, MagicItem } from "../realm/RealmConfig";
 
 const { useRealm, useQuery, useObject } = RealmContext;
 
-const useLocalDataSource = () => {
+const useLocalDataSource = ({ schema }) => {
     const realm = useRealm();
     const [error, setError] = useState("");
+    const [data, setData] = useState({});
 
     const addItem = useCallback(
-        ({ itemData, schema }) => {
+        ({ itemData }) => {
             if (!itemData || !schema) {
                 setError("Could not save item due to missing data or schema.");
                 return;
@@ -24,5 +25,7 @@ const useLocalDataSource = () => {
         [realm]
     );
 
-    const getItem = () => {};
+    const getItemById = ({ _id }) => useObject({ schema, _id });
+
+    const getAllMatchingItems = useQuery();
 };

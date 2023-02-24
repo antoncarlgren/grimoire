@@ -10,7 +10,7 @@ import Home from "./ui/screens/Home";
 import SearchResult from "./ui/screens/SearchResult";
 import { loadFonts } from "./init/InitializeFonts";
 import { defaultOptions, searchResultOptions } from "./navigation/StackOptions";
-import RealmContext from "./realm/RealmConfig";
+import RealmContext from "../store/RealmContext";
 import LoadingAnimation from "./ui/components/LoadingAnimation";
 
 const { RealmProvider } = RealmContext;
