@@ -34,11 +34,6 @@ export const spellSearchOptions = {
             alias: "r",
         },
         {
-            target: "desc",
-            key: "desc",
-            alias: "d",
-        },
-        {
             target: "components",
             key: "comp",
         },
@@ -70,11 +65,6 @@ export const magicItemSearchOptions = {
             target: "type",
             key: "type",
             alias: "t",
-        },
-        {
-            target: "desc",
-            key: "desc",
-            alias: "d",
         },
         {
             target: "requires_attunement",

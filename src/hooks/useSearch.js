@@ -1,7 +1,8 @@
 import { useState, useEffect, useMemo } from "react";
 import { useDebounce } from "./useDebounce";
+import { useStorage } from "./useStorage";
 
-export const useSearch = (source, searchKeys, query, delay = 250) => {
+export const useSearch = ({ source, searchKeys, query, delay = 250 }) => {
     const [searchPairs, setSearchPairs] = useState({});
     const debouncedQuery = useDebounce(query, delay);
 

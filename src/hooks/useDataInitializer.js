@@ -1,63 +1,76 @@
 import axios from "axios";
+import HttpRequestError from "../api/HttpRequestError";
 import { useEffect, useState } from "react";
-import { useAsyncStorage } from "@react-native-async-storage/async-storage";
+import { useStorage } from "./useStorage";
+import { paths } from "../constants/ApiConfig";
 
-export const useDataInitializer = (root, path) => {
+export const useDataInitializer = (baseUrl, path, timeout = 3000) => {
+    const storage = useStorage();
     const [data, setData] = useState([]);
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(true);
-    const { getItem, setItem } = useAsyncStorage(path);
 
-    const getItemFromApi = async (url, loadedData) => {
+    const client = axios.create({
+        timeout: timeout,
+    });
+
+    const getAllItemsFromApi = async (url, loadedItems = [], pageIndex = 0) => {
         try {
-            const response = await axios.get(url);
-            loadedData = [...loadedData, ...response.data.results];
+            const response = await client.get(url);
+
+            if (response.status !== 200) {
+                throw new HttpRequestError(
+                    response.status,
+                    response.statusText
+                );
+            }
+
+            const indexedItems = formatPageItems(
+                response.data.results,
+                pageIndex
+            );
+
+            loadedItems = [...loadedItems, ...indexedItems];
+
             if (response.data.next == null) {
-                const json = JSON.stringify(loadedData);
-                await setItem(json);
-
-                setData([...loadedData]);
+                await storage.setArrayAsync();
                 setLoading(false);
-
                 return;
             }
 
-            await getItemFromApi(response.data.next, loadedData);
+            await getAllItemsFromApi(
+                response.data.next,
+                loadedItems,
+                pageIndex + 1
+            );
         } catch (error) {
-            setLoading(false);
             setError(error);
+            setLoading(false);
         }
     };
 
-    const getItemFromLocalStorage = async () => {
-        try {
-            const localJson = await getItem();
-            if (localJson != null) {
-                const data = JSON.parse(localJson);
-                setData(data);
-                setLoading(false);
+    const formatPageItems = (results, pageIndex) => {
+        const indexedItems = results.map((item) => {
+            return {
+                index: pageIndex,
+                ...item,
+            };
+        });
 
-                return true;
-            }
-
-            return false;
-        } catch (error) {
-            setLoading(false);
-            setError(error);
-
-            return false;
-        }
+        return indexedItems;
     };
 
     useEffect(() => {
-        const loadData = async () => {
-            const loadedLocalItem = await getItemFromLocalStorage();
-            if (!loadedLocalItem) {
-                await getItemFromApi(root + path, []);
-            }
+        const initializeData = async () => {
+            const items =
+                (await storage.getArrayAsync(path)) ??
+                (await getAllItemsFromApi(baseUrl + path));
+
+            setData[items];
         };
-        loadData();
-    }, [root, path]);
+
+        initializeData();
+    }, []);
 
     return [data, loading, error];
 };

@@ -6,10 +6,11 @@ import * as SearchOptions from "../../constants/SearchOptions";
 import ContentContainer from "../components/containers/ContentContainer";
 import HomeHeader from "../components/text/HomeHeader";
 import MainButton from "../components/input/MainButton";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { colors } from "../../constants/Colors";
+import { useStorage } from "../../hooks/useStorage";
 
 const HomeScreen = ({ navigation }) => {
+    const storage = useStorage();
     return (
         <ContentContainer style={[styles.container]}>
             <KeyboardAvoidingView
@@ -46,7 +47,10 @@ const HomeScreen = ({ navigation }) => {
                 <MainButton
                     title="fuck up the database"
                     color={colors.primaryRed}
-                    onPress={() => AsyncStorage.clear()}
+                    onPress={() => {
+                        storage.clearStorage();
+                        storage.clearMemoryCache();
+                    }}
                 />
             </KeyboardAvoidingView>
         </ContentContainer>

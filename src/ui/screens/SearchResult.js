@@ -6,13 +6,12 @@ import ItemCard from "../components/containers/ItemCard";
 import LoadingAnimation from "../components/LoadingAnimation";
 import { useDataInitializer } from "../../hooks/useDataInitializer";
 import { useSearch } from "../../hooks/useSearch";
-import { paths } from "../../constants/ApiConfig";
+import { useStorage } from "../../hooks/useStorage";
 import NavigationHeader from "../components/NavigationHeader";
-import { useDebounce } from "../../hooks/useDebounce";
 
 const SearchResult = ({ route, navigation }) => {
     const { path, cardColors, keys } = route.params;
-    const [items, loading, error] = useDataInitializer(paths.base, path);
+    const [loading, error] = useDataInitializer(path);
     const [query, setQuery] = useState("");
     const filteredItems = useSearch(items, keys, query);
 
